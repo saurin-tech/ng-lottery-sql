@@ -1,0 +1,28 @@
+<md-grid-list *ngIf="shiftLive$ | async as shiftLive; else loading" cols="1" rowHeight="200px">
+  <md-grid-tile >
+      <button md-raised-button [disabled]='shiftLive.active' color="primary" (click)='openShift()'>Open Shift</button>
+      <button md-raised-button [disabled]='!shiftLive.active' color="warn" (click)='closeShift()'>Close Shift</button>
+  </md-grid-tile>
+<md-grid-tile>
+    <md-card class="card">
+        <md-card-title>
+          Shift Stats:
+        </md-card-title>
+        <md-card-content>
+            <div >
+                <p> Shift status: {{ shiftLive.active }} </p>
+              
+                <p> Tickets Sold: {{ shiftLive.totalNumberOfTicketsSold }} </p>
+                <p> Amount of Tickets Sold: {{ shiftLive.totalValueOfTicketsSold }} </p>
+            </div>
+          </md-card-content>
+      </md-card>
+</md-grid-tile>
+</md-grid-list>
+
+
+<!-- <div *ngIf="(shiftLive | async)?.notnull; else loading">  *ngIf="shiftLive$ | async as shiftLive; else loading"-->
+
+<ng-template #loading>Loading Data...</ng-template>
+
+

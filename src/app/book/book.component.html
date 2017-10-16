@@ -1,0 +1,27 @@
+<div *ngIf="shiftLive$ | async as shiftLive; else loading">
+  <div *ngIf="shiftLive.active; else openShift">
+    <form [formGroup]="rForm" class="settings-form" (ngSubmit)="onSubmit(rForm.value)">
+      <md-form-field class="settings-full-width">
+        <input mdInput placeholder="Game Name" formControlName="bookName" mdTooltip="Name of the game.">
+      </md-form-field>
+      <div class="alert" *ngIf="!rForm.controls['bookName'].valid && rForm.controls['bookName'].touched">This is required!</div>
+      <md-form-field class="settings-full-width">
+        <input mdInput placeholder="Price e.g. 1" formControlName="price" mdTooltip="price of the game.">
+      </md-form-field>
+      <div class="alert" *ngIf="!rForm.controls['price'].valid && rForm.controls['price'].touched">This is required!</div>
+      <md-form-field class="settings-full-width">
+        <input mdInput placeholder="Max number of ticket e.g. 299" formControlName="maxNumber" mdTooltip="Maximum number of the ticket">
+      </md-form-field>
+      <div class="alert" *ngIf="!rForm.controls['maxNumber'].valid && rForm.controls['maxNumber'].touched">This is required!</div>
+      <md-form-field class="settings-full-width">
+        <input mdInput placeholder="Scan the book barcode" formControlName="wholeNumber" mdTooltip="Scan the barcode">
+      </md-form-field>
+      <div class="alert" *ngIf="!rForm.controls['wholeNumber'].valid && rForm.controls['wholeNumber'].touched">This is required!</div>
+      <button md-button [disabled]="!rForm.valid">Submit</button>
+    </form>
+  </div>
+</div>
+
+<ng-template #loading>Loading Data...</ng-template>
+
+<ng-template #openShift>Open Shift First!</ng-template>

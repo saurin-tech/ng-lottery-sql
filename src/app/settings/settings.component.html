@@ -1,0 +1,45 @@
+<md-tab-group>
+    <md-tab>
+      <ng-template md-tab-label>
+        Current Settings
+      </ng-template>
+      <div *ngIf="settings$ | async as settings; else loading">
+        <md-card><p>Store Name: {{ settings.storeName }}</p>
+          <p>Digits in Game#: {{ settings.numberOfDigitsInGameNumber }}</p>
+          <p>Digits in book#: {{ settings.numberOfDigitsInBookNumber }}</p>
+          <p>Ascending: {{ settings.ascendingOrder }}</p>
+          <p>Email: {{ settings.email }}</p>
+        </md-card>
+      </div>
+    </md-tab>
+    <md-tab>
+      <ng-template md-tab-label>
+        Update Settings
+      </ng-template>
+      <form [formGroup]="rForm"
+        class="settings-form" (ngSubmit)="onSubmit(rForm.value)">
+          <md-form-field class="settings-full-width">
+            <input mdInput placeholder="StoreName" formControlName="storeName" mdTooltip="Name of your store.">
+          </md-form-field>
+          <div class="alert" *ngIf="!rForm.controls['storeName'].valid && rForm.controls['storeName'].touched">This is required!</div>
+          <md-form-field class="settings-full-width">
+            <input mdInput placeholder="Number of Digits in Game Number" formControlName="digitsGameNumber" mdTooltip="How many numbers are there in your game number?  game number is here - 1234567-12345677">
+          </md-form-field>
+          <div class="alert" *ngIf="!rForm.controls['digitsGameNumber'].valid && rForm.controls['digitsGameNumber'].touched">This is required!</div>         
+          <md-form-field class="settings-full-width">
+            <input mdInput placeholder="Number of Digits in Book Number" formControlName="digitsBookNumber" mdTooltip="How many numbers are there in your book number?  123-BookNumber is here - 123456789">
+          </md-form-field>
+          <div class="alert" *ngIf="!rForm.controls['digitsBookNumber'].valid && rForm.controls['digitsBookNumber'].touched">This is required!</div>
+          <md-form-field class="settings-full-width">
+            <input mdInput placeholder="Email" formControlName="email" mdTooltip="Your email for shift end alerts!.">
+          </md-form-field>
+          <div class="alert" *ngIf="!rForm.controls['storeName'].valid && rForm.controls['storeName'].touched">This is required!</div>
+            
+          <md-checkbox formControlName="ascending" [(ngModel)]="checked" mdTooltip="If your book numbers go from 0 to X check this box.">Ascending Order</md-checkbox>
+            <hr>
+            <button md-button [disabled]="!rForm.valid">Submit</button>
+        </form>
+    </md-tab>
+  </md-tab-group>
+
+  <ng-template #loading>Need to set the settings</ng-template>

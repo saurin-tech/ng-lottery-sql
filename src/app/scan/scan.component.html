@@ -1,0 +1,33 @@
+<div *ngIf="shiftLive$ | async as shiftLive; else loading">
+  <div *ngIf="shiftLive.active; else openShift">
+    <md-tab-group>
+      <md-tab>
+        <ng-template md-tab-label>
+          Opening Shift Scan
+        </ng-template>
+        <form [formGroup]="rForm" class="scan-form" (keydown.enter)="onSubmitOpen(rForm.value)">
+          <md-form-field class="scan-full-width">
+            <input autofocus mdInput placeholder="Scan the ticket" formControlName="ticket" mdTooltip="Scan the ticket here">
+          </md-form-field>
+          <div class="alert" *ngIf="!rForm.controls['ticket'].valid && rForm.controls['ticket'].touched">This is required!</div>
+        </form>
+      </md-tab>
+      <md-tab>
+        <ng-template md-tab-label>
+          Closing Shift Scan
+        </ng-template>
+        <form [formGroup]="rFormClose" class="scan-form" (keydown.enter)="onSubmitClose(rFormClose.value)">
+          <md-form-field class="scan-full-width">
+            <input autofocus mdInput placeholder="Scan the ticket" formControlName="ticketClose" mdTooltip="Scan the ticket here">
+          </md-form-field>
+          <div class="alert" *ngIf="!rFormClose.controls['ticketClose'].valid && rFormClose.controls['ticketClose'].touched">This is required!</div>
+        </form>
+      </md-tab>
+    </md-tab-group>
+  </div>
+</div>
+
+
+<ng-template #loading>Loading Data...</ng-template>
+
+<ng-template #openShift>Open Shift First!</ng-template>

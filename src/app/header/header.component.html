@@ -1,0 +1,27 @@
+<md-sidenav-container fullscreen>
+  <md-sidenav mode='push' #start>
+    <md-nav-list>
+      <a md-list-item routerLink = "book" routerLinkActive="active">Book</a>
+      <hr>
+      <a md-list-item routerLink = "shift" routerLinkActive="active">Shift</a>
+      <hr>
+      <a md-list-item routerLink = "scan" routerLinkActive="active">Scan</a>
+      <hr>
+      <a md-list-item routerLink = "settings" routerLinkActive="active">Settings</a>
+      <hr>
+      <a md-list-item routerLink = "about" routerLinkActive="active">About</a>
+    </md-nav-list>
+    <hr>
+    <button md-button (click)="start.close()">Close</button>
+  </md-sidenav>
+  <md-toolbar color='primary'>
+    <button md-icon-button (click)="start.open()">
+      <md-icon>menu</md-icon>
+    </button>
+    <span>Lottery Ticket Manager (LTM)</span>
+  </md-toolbar>
+  <div class="main-content">
+    <router-outlet></router-outlet>
+  </div>
+</md-sidenav-container>
+
